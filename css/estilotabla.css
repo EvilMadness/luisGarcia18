@@ -1,0 +1,10 @@
+table{
+    text-align: center;
+    border-color: blue;
+}
+tbody tr:nth-last-child(odd){
+    background: rgba(4, 1, 4, 0.49)
+}
+tbody tr:nth-child(odd) {
+    background: rgba(22, 22, 22, 0.49);
+}
