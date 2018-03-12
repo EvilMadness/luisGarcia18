@@ -8,7 +8,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$basededatos = "id2579717_tarea";
+$basededatos = "prograweb";
 
 
 try{
