@@ -1,0 +1,20 @@
+body{
+    background-image: url("../images/space-wallpaper-20.jpg ");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+header{
+    background-image: url("../images/galaxy-wallpaper.jpg");
+    width: 100%;
+    height: 70px;
+}
+.h2{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 1px;
+    color: #ffffff;
+}
+.h22{
+    text-align: center;
+    color: #ffffff;
+}
