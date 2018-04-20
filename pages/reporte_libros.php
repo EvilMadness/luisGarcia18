@@ -52,7 +52,7 @@
                 <td><?php echo $row['aniopublicacion'];?></td>
                 <td><?php echo $row['materia'];?></td>
                 <td><?php echo $row['editorial'];?></td>
-                <td></td>
+                <td><a href="editar_libro.php?id=<?php echo $row['id_libro'];?>">Editar</a></td>
                 <td><a href="eliminar_libros.php?id=<?php echo $row['id_libro'];?>"
                        onclick="return confirmDelete('<?php echo $row['titulo'];?>')">Eliminar</a></td>
             </tr>
