@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Reporte de libros</title>
     <link rel="stylesheet" href="../css/stylePage.css">
     <script>
         function confirmDelete(titulo) {
