@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (isset($_SESSION["user"])==""){
+    header("Location:login.php");
+}
 require_once "conn_mysql_luis.php";
 $sql1 = 'SELECT * FROM materia';
 $sql2 = 'SELECT * FROM editorial';

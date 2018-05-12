@@ -18,3 +18,12 @@ header{
     text-align: center;
     color: #ffffff;
 }
+label{
+    background-color: rgba(3,4,4,0.64);
+    color: #ffffff;
+}
+.barra{
+    font-size: 20px;
+    padding-top: 20px;
+    color: #ffffff;
+}

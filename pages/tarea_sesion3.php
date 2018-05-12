@@ -1,10 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: LuisÁngel
- * Date: 02/02/18
- * Time: 05:02 PM
- */
+session_start();
+if (isset($_SESSION["user"])==""){
+    header("Location:login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

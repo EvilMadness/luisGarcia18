@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION["user"])==""){
+    header("Location:login.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +35,7 @@
         <h4 class="h22">PROGRAMACIÓN WEB</h4>
     </header>
 </div>
-<h3>Reporte de la tabla de MySQL en HTML</h3>
+<h3>Reporte de la tabla de MySQL en HTML, <?php echo $_SESSION["user"]?></h3>
 <div align="center">
     <table border="1" width="70%" style="background-color: #469599">
         <tr>
@@ -60,6 +66,7 @@
     </table>
     <br>
     <input type="button" onclick="location.href='grabar_libros.php';" value="Agregar Nuevo" />
+    <input type="button" onclick="location.href='logoff.php';" value="Cerrar Sesión" />
 </div>
 <div>
 </div>
