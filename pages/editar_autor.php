@@ -1,15 +1,30 @@
 <?php
-session_start();
-if (isset($_SESSION["user"])==""){
-    header("Location:login.php");
-}
 require_once "conn_mysql_luis.php";
+
+$idautor = $_GET["id"];
+$idautor = (int)$idautor;
+
+if($idautor == "") {
+    header("Location: libroNoEncontrado.php");
+    exit;
+}
+if(is_null($idautor)) {
+    header("Location: libroNoEncontrado.php");
+    exit;
+}
+
+$sqlCONSULTA = 'SELECT * FROM autor WHERE id_autor = '.$idautor;
+$result = $conn->query($sqlCONSULTA);
+$autores = $result->fetchAll();
+if (empty($autores)) {
+    $result = "No se encontraron registros !!";
+}
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de autores</title>
+    <title>Edición de autores</title>
     <link rel="stylesheet" href="../css/layout.css">
     <script src="../js/validacion.js"></script>
 </head>
@@ -52,45 +67,43 @@ require_once "conn_mysql_luis.php";
         </nav>
     </header>
 </div>
+<?php foreach ($autores as $autor){ ?>
 <div class="wrapper row3 bgded fondoformulario">
     <main class="hoc container clear">
         <div id="comments">
             <h3 class="healsettabla2" align="center">Registro de Autores</h3>
-            <form action="registrar_autor.php" method="post" id="formulario" onsubmit="return validarAutor()">
+            <form action="actualizar_autor.php?id=<?php echo $autor["id_autor"];?>" method="post" id="formulario" onsubmit="return validarAutor()">
                 <div class="one_quarter first">
                     <label for="txtnumero"><b>Id de autor</b></label>
-                    <input type="number" id="txtnumero" name="txtnumero" placeholder="Id del autor: 123" required>
+                    <input type="number" id="txtnumero" name="txtnumero" placeholder="Id del autor: 123" value="<?php echo $autor["id_autor"];?>" required>
                 </div>
                 <div class="one_third first">
                     <label for="txtnombre"><b>Nombre del autor: </b></label>
-                    <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre del nuevo autor" required>
+                    <input type="text" id="txtnombre" name="txtnombre" placeholder="Nombre del nuevo autor" value="<?php echo $autor["nombre"];?>" required>
                 </div>
                 <div class="one_third">
                     <label for="txtapaterno"><b>Apellido Paterno: </b></label>
-                    <input id="txtapaterno" name="txtapaterno" type="text" placeholder="Apellido paterno del autor" required>
+                    <input id="txtapaterno" name="txtapaterno" type="text" placeholder="Apellido paterno del autor" value="<?php echo $autor["paterno"];?>" required>
                 </div>
                 <div class="one_third">
                     <label for="txtamaterno"><b>Apellido Materno</b></label>
-                    <input id="txtamaterno" name="txtamaterno" type="text" placeholder="Apellido materno del autor" required>
+                    <input id="txtamaterno" name="txtamaterno" type="text" placeholder="Apellido materno del autor" value="<?php echo $autor["materno"];?>" required>
                 </div>
                 <div class="one_half first">
                     <label for="txtdireccion"><b>Dirección: </b></label>
-                    <input id="txtdireccion" name="txtdireccion" type="text" placeholder="Domicilio u dirección" required>
+                    <input id="txtdireccion" name="txtdireccion" type="text" placeholder="Domicilio u dirección" value="<?php echo $autor["direccion"];?>" required>
                 </div>
                 <div class="one_quarter">
                     <label for="txtpais"><b>Pais: </b></label>
-                    <input id="txtpais" name="txtpais" type="text" placeholder="Pais de origen: México" required>
+                    <input id="txtpais" name="txtpais" type="text" placeholder="Pais de origen: México" value="<?php echo $autor["pais"];?>" required>
                 </div>
                 <div class="one_quarter">
                     <label for="txtnickname"><b>Nickname: </b></label>
-                    <input id="txtnickname" name="txtnickname" type="text" placeholder="Nombre de usuario" required>
+                    <input id="txtnickname" name="txtnickname" type="text" placeholder="Nombre de usuario" value="<?php echo $autor["nickname"];?>" required>
                 </div>
                 <div>
-                    <div class="one_half center first">
-                        <input class="btnagregar" type="submit" name="submit" value="Registrar Libro" >
-                    </div>
-                    <div class="one_half center">
-                        <input class="btnagregar" type="reset" value="Limpiar Campos">
+                    <div class="center first">
+                        <input class="btnagregar" type="submit" name="submit" value="Actualizar registro" >
                     </div>
                     <div>
                         <input class="btnagregar" onclick="location.href='reporte_libros.php'" type="button" value="Regrasar al reporte">
@@ -99,6 +112,7 @@ require_once "conn_mysql_luis.php";
             </form>
         </div>
     </main>
+    <?php } ?>
     <div class="wrapper row5">
         <div id="copyright" class="hoc clear">
             <!-- ################################################################################################ -->

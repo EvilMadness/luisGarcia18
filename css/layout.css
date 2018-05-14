@@ -525,12 +525,12 @@ label{
 	text-align: center;
 }
 .fondosombreado{
-	background-color: rgba(37, 139, 255, 0.24);
+	font-size: 26px;
 	border-radius: 100px;
-	color: rgb(252, 255, 31);
+	color: rgb(255, 255, 255);
 }
 .fondoformulario{
-	background-image: url('../../images/Smash.jpg');
+	background-image: url('../images/graytexture.jpg');
 }
 input[type=file]{
 	border-radius: 5px;
@@ -551,6 +551,23 @@ input[type=file]{
 	padding-right: 100px;
 }
 .btnagregar:hover {
+	background-color: rgba(0, 0, 0, 0.85);
+}
+.btnagregar2{
+	width: 30%;
+	background-color: rgba(0, 0, 0, 0.51);
+	color: #ffffff;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight:bold;
+	text-transform:uppercase;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+.btnagregar2:hover {
 	background-color: rgba(0, 0, 0, 0.85);
 }
 .fondoLink{

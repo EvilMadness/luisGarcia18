@@ -41,44 +41,77 @@ if (empty($libros)) {
 <head>
     <meta charset="UTF-8">
     <title>Edición de libros</title>
-    <link rel="stylesheet" href="../css/estilosa.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="../css/layout.css">
     <script src="../js/validacion.js"></script>
 </head>
-<body>
-<?php
-foreach ($libros as $libro){
-?>
-<div align="center">
-    <fieldset style="align-content: center">
-        <div style="width: 60%">
-            <input class="w3-button w3-block w3-teal" type="submit" name="buscar" value="Regresar al reporte completo" onclick="location.href='reporte_libros.php';">
+<body id="top">
+<div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+        <div class="fl_left">
+            <ul class="nospace inline pushright">
+                <li><i class="fa fa-phone"></i> (386) 106 4302</li>
+                <li><i class="fa fa-envelope-o"></i> luisgarcia@alumnos.udg.mx</li>
+            </ul>
         </div>
-        <legend style=" font-size: 20px"><b>Edicion de un libro</b></legend>
+        <div class="fl_right">
+            <ul class="faico clear">
+                <li><a class="faicon-facebook" href="http://www.facebook.com/LuizGarcia.CA"><i class="fa fa-facebook"></i></a></li>
+                <li><a class="faicon-twitter" href="https://twitter.com/RayoMonster"><i class="fa fa-twitter"></i></a></li>
+                <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="wrapper row1">
+    <header id="header" class="hoc clear">
+        <div id="logo" class="fl_left">
+            <h1><a href="../index.php">Programación Web</a></h1>
+        </div>
+        <nav id="mainav" class="fl_right">
+            <ul class="clear">
+                <li><a href="../index.php">Inicio</a></li>
+                <?php
+                if (isset($_SESSION["user"])){?>
+                <li><a class="drop" href="#"><?php echo $_SESSION["user"];?></a>
+                    <ul>
+                        <li><a href="logoff.php">Cerrar Sesión</a></li>
+                        <li><a href="reporte_libros.php">Reporte de libros</a></li>
+                        <li><a href="grabar_autor.php">Registrar Autor</a></li>
+                    </ul>
+                    <?php } ?>
+            </ul>
+        </nav>
+    </header>
+</div>
+<div class="wrapper row3 bgded fondoformulario">
+    <main class="hoc container clear">
+        <div id="comments">
+            <h3 class="healsettabla2" align="center">Editar Libros</h3>
+            <?php foreach ($libros as $libro){ ?>
         <form action="actualizar_libro.php?id=<?php echo $libro['id_libro'] ?> " method="post" id="formulario" onsubmit="return validarForm()">
-            <div align="left">
+            <div class="one_quarter first">
                 <label for="txtnumero"><b>Id de libro</b></label>
-                <input class="w3-input w3-border" type="number" id="txtnumero" disabled name="txtnumero" placeholder="Id del libro 123" value="<?php echo $libro['id_libro'];?>">
-            </div><br>
-            <div align="left">
+                <input  type="number" id="txtnumero" name="txtnumero" placeholder="Id del libro 123" value="<?php echo $libro["id_libro"];?>">
+            </div>
+            <div class="one_half">
                 <label for="txttitulo"><b>Titulo del libro</b></label>
-                <input class="w3-input w3-border" type="text" id="txttitulo" name="txttitulo" placeholder="Nombre del libro" value="<?php echo $libro['titulo'];?>">
-            </div><br>
-            <div align="left">
+                <input type="text" id="txttitulo" name="txttitulo" placeholder="Nombre del libro" value="<?php echo $libro["titulo"];?>">
+            </div>
+            <div class="one_quarter">
                 <label for="txtpaginas"><b>Número de páginas</b></label>
-                <input class="w3-input w3-border" id="txtpaginas" name="txtpaginas" type="number" placeholder="12" value="<?php echo $libro['npaginas'];?>">
-            </div><br>
-            <div align="left">
+                <input id="txtpaginas" name="txtpaginas" type="number" placeholder="12" value="<?php echo $libro["npaginas"];?>">
+            </div>
+            <div class="one_third first">
                 <label for="txtprecio"><b>Precio del libro</b></label>
-                <input class="w3-input w3-border" id="txtprecio" name="txtprecio" type="number" placeholder="$ precio $" value="<?php echo $libro['precioactual'];?>">
-            </div><br>
-            <div align="left">
+                <input id="txtprecio" name="txtprecio" type="number" placeholder="$ precio $" value="<?php echo $libro["precioactual"];?>">
+            </div>
+            <div class="one_third">
                 <label for="txtcantidad"><b>Cantidad de libros</b></label>
-                <input class="w3-input w3-border" id="txtcantidad" name="txtcantidad" type="number" placeholder="123" value="<?php echo $libro['stock'];?>">
-            </div><br>
-            <div align="left">
+                <input id="txtcantidad" name="txtcantidad" type="number" placeholder="123" value="<?php echo $libro["stock"];?>">
+            </div>
+            <div class="one_third">
                 <label for="combo_aniopublicacion"><b>Año de publicación</b><br></label>
-                <select class="w3-input w3-border" name="combo_aniopublicacion" id="combo_aniopublicacion">
+                <select name="combo_aniopublicacion" id="combo_aniopublicacion">
                     <option value="0" >...Seleccione el año...</option>
                     <?php
                     for ($x = 1990; $x <= 2018; $x ++){
@@ -90,11 +123,11 @@ foreach ($libros as $libro){
                     }
                     ?>
                 </select>
-            </div><br>
-            <div align="left">
+            </div>
+            <div class="one_third first">
                 <label for="combo_materia"><b>Nombre de la materia</b></label>
-                <select class="w3-input w3-border" name="combo_materia" id="combo_materia">
-                    <option value="0" >...Seleccione una materia...</option>
+                <select name="combo_materia" id="combo_materia">
+                    <option value="0">...Seleccione una materia...</option>
                     <?php
                     foreach ($materias as $materia){
                         echo ('<option value="'.$materia['id_materia'].'"');
@@ -105,10 +138,10 @@ foreach ($libros as $libro){
                     }
                     ?>
                 </select>
-            </div><br>
-            <div align="left">
+            </div>
+            <div class="one_third">
                 <label for="combo_editorial"><b>Nombre de la editorial</b></label>
-                <select class="w3-input w3-border" name="combo_editorial" id="combo_editorial">
+                <select name="combo_editorial" id="combo_editorial">
                     <option value="0">...Seleccione una editorial...</option>
                     <?php
                     foreach ($editoriales as $editorial){
@@ -120,14 +153,14 @@ foreach ($libros as $libro){
                     }
                     ?>
                 </select>
-            </div><br>
-            <div align="left">
+            </div>
+            <div class="one_third">
                 <label for="combo_autor"><b>Nombre del autor</b></label>
-                <select class="w3-input w3-border" name="combo_autor" id="combo_autor">
+                <select name="combo_autor" id="combo_autor">
                     <option value="0">...Seleccione un autor...</option>
                     <?php
                     foreach ($autores as $autor){
-                        echo ('<option value="'.$materia['id_autor'].'"');
+                        echo ('<option value="'.$autor['id_autor'].'"');
                         if ($autor['id_autor']==$libro['id_autor']){
                             echo ('selected');
                         }
@@ -135,14 +168,19 @@ foreach ($libros as $libro){
                     }
                     ?>
                 </select>
-            </div><br>
-                <div style="width: 60%">
-                    <input class="w3-button w3-block w3-teal" type="submit" name="buscar" value="Actualizar Libro">
-                </div><br/>
-            <div></div>
+            </div>
+            <div class="center">
+                <div>
+                    <input class="btnagregar" type="submit" name="submit" value="Actualizar Registro" >
+                </div>
+                <div>
+                    <input class="btnagregar" onclick="location.href='reporte_libros.php'" type="button" value="Regrasar al reporte">
+                </div>
+            </div>
             <?php } ?>
         </form>
-    </fieldset>
+        </div>
+    </main>
 </div>
 </body>
 </html>

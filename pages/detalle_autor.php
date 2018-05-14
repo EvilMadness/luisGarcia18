@@ -3,31 +3,19 @@ session_start();
 if (isset($_SESSION["user"])==""){
     header("Location:login.php");
 }
+require_once "conn_mysql_luis.php";
+$idautor = (int)$_GET["id"];
+
+$sql = 'SELECT * FROM autor WHERE id_autor = '.$idautor;
+$result = $conn -> query($sql);
+$rows = $result -> fetchAll();
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte de libros</title>
+    <title>Document</title>
     <link rel="stylesheet" href="../css/layout.css">
-
-    <script>
-        function confirmDelete(titulo) {
-            if (confirm("¿Estas seguro de eliminar el libro "+titulo+"?")==true){
-                return true;
-            }else
-                return false;
-        }
-    </script>
-    <?php
-    require_once "conn_mysql_luis.php";
-    $sql = 'SELECT * FROM libros l
-      INNER JOIN editorial e ON l.id_editorial = e.id_editorial
-      INNER JOIN autor a ON l.id_autor = a.id_autor
-      INNER JOIN materia m ON l.id_materia = m.id_materia';
-    $result = $conn -> query($sql);
-    $rows = $result -> fetchAll();
-    ?>
 </head>
 <body id="top">
 <div class="wrapper row0">
@@ -71,35 +59,34 @@ if (isset($_SESSION["user"])==""){
 </div>
 <div class="wrapper row3 bgded  fondoformulario">
     <main class="hoc container clear">
-        <h3 class="healsettabla2" align="center">Reporte general de libros</h3>
+        <h3 class="healsettabla2" align="center">Detalles de autor</h3>
         <div align="center">
-            <table border="1" width="70%" style="background-color: #469599">
-                <tr>
-                    <th>Libro</th>
-                    <th>Autor</th>
-                    <th>Paginas</th>
-                    <th>Año</th>
-                    <th>Materia</th>
-                    <th>Editorial</th>
-                    <th>Acciones</th>
-                </tr>
+            <table border="1" width="60%">
                 <?php foreach ($rows as $row){ ?>
                     <tr>
-                        <td><?php echo $row['titulo'];?></td>
-                        <td><?php echo $row['nombre'];?></td>
-                        <td><?php echo $row['npaginas'];?></td>
-                        <td><?php echo $row['aniopublicacion'];?></td>
-                        <td><?php echo $row['materia'];?></td>
-                        <td><?php echo $row['editorial'];?></td>
-                        <td><a href="detalle_autor.php?id=<?php echo $row['id_autor']?>">Detalles</a>
-                            <a href="editar_libro.php?id=<?php echo $row['id_libro'];?>">Editar</a>
-                            <a href="eliminar_libros.php?id=<?php echo $row['id_libro'];?>"
-                               onclick="return confirmDelete('<?php echo $row['titulo'];?>')">Eliminar</a></td>
+                        <th>Nombre</th>
+                        <td><?php echo $row['nombre']." ".$row['paterno']." ".$row['materno'];?></td>
+                        <td><a href="editar_autor.php?id=<?php echo $row["id_autor"];?>">Editar</td>
+                    </tr>
+                    <tr>
+                        <th>Dirección</th>
+                        <td><?php echo $row['direccion'];?></td>
+                        <td><a href="">Eliminar</td>
+                    </tr>
+                    <tr>
+                        <th>Pais</th>
+                        <td><?php echo $row['pais'];?></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Nickname</th>
+                        <td><?php echo $row['nickname'];?></td>
+                        <td></td>
                     </tr>
                 <?php } ?>
             </table>
             <br>
-            <input class="btnagregar" type="button" onclick="location.href='grabar_libros.php'" value="Nuevo Libro">
+            <input class="btnagregar" type="button" onclick="location.href='reporte_libros.php'" value="Ver reporte">
         </div>
     </main>
 </div>

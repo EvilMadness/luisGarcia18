@@ -14,9 +14,8 @@ $editorial = $_POST["combo_editorial"];
 $autor = $_POST["combo_autor"];
 
 $sqlUpdate = "UPDATE libros SET titulo='$titulo', npaginas=$paginas, aniopublicacion=$anio, precioactual=$precio, stock=$cantidad, id_materia=$materia, id_editorial=$editorial, id_autor=$autor WHERE id_libro=".$id;
+//echo $sqlUpdate;
+$conn->exec($sqlUpdate);
 
-echo $sqlUpdate;
-//$conn->exec($sqlUpdate);
-
-//echo "<script type='text/javascript'>window.location.replace('http://localhost/luisGarcia18/pages/reporte_libros.php')</script>"
+echo "<script type='text/javascript'>window.location.replace('http://localhost/xampp/luisGarcia18/pages/reporte_libros.php')</script>"
 ?>
